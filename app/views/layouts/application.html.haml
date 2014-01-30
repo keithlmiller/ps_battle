@@ -1,0 +1,32 @@
+%html
+  %head
+    %title PsBattle
+    = stylesheet_link_tag "application", media: "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  
+  %body
+    .container
+      %header
+        %h1.brand= link_to "PsBattle", root_url
+
+        %nav
+          %ul.nav.nav-pills
+            - if current_user
+              %li.disabled
+                = link_to "#" do
+                  Hello,
+                  = current_user.email
+              %li= link_to "Sign out", signout_path, method: "delete"
+            - else
+              %li= link_to "Sign in", signin_path
+              %li= link_to "Sign up", signup_path
+
+
+      .content
+        %p.notice= notice
+        %p.alert= alert
+
+
+        
+        = yield
