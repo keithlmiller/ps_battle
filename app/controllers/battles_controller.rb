@@ -1,6 +1,7 @@
 class BattlesController < ApplicationController
   before_action :set_battle, only: [:show, :edit, :update, :destroy]
 
+
   # GET /battles
   # GET /battles.json
   def index
@@ -28,6 +29,7 @@ class BattlesController < ApplicationController
 
     respond_to do |format|
       if @battle.save
+        @battle = Battle.new(:name => params[:battle][:name], :creator => current_user.id, :created_at => Time.now)
         format.html { redirect_to @battle, notice: 'Battle was successfully created.' }
         format.json { render action: 'show', status: :created, location: @battle }
       else

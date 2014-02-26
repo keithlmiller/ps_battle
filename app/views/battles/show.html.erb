@@ -15,5 +15,20 @@
   <%= @battle.creator %>
 </p>
 
+<table>
+  <tr>
+    <th>Post Title</th>
+  </tr>
+  <% for posts in @battle.posts %>
+    <tr>
+      <td><%= link_to h(post.name), post_path(post.id) %>
+      <td><%= link_to "Show", topic %></td>
+      <td><%= link_to "Edit", edit_topic_path(topic) %></td>
+      <td><%= link_to "Destroy", topic, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'New Post', '/posts/new?battle=#{@battle.id}' %>
 <%= link_to 'Edit', edit_battle_path(@battle) %> |
 <%= link_to 'Back', battles_path %>
