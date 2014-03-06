@@ -34,6 +34,12 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 
 gem 'haml'
 
+gem 'acts_as_tree'
+
+gem 'paperclip', '~> 4.1'
+
+gem 'better_errors'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

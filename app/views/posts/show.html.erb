@@ -1,24 +1,6 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @post.description %>
-</p>
-
-<p>
-  <strong>Creator:</strong>
-  <%= @post.creator %>
-</p>
-
-<p>
-  <strong>Parent:</strong>
-  <%= @post.parent %>
-</p>
+<div id="posts">
+  <%= render :partial => 'posts/post', :object => Post.find(params[:id]) %>
+</div>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>

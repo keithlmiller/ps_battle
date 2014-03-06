@@ -11,6 +11,7 @@ class BattlesController < ApplicationController
   # GET /battles/1
   # GET /battles/1.json
   def show
+    
   end
 
   # GET /battles/new
