@@ -1,10 +1,8 @@
-%h2 Sign In 
-  = form_tag sessions_path do 
-    .field
-      = label_tag :email
-      = text_field_tag :email, ""
-    .field 
-      = label_tag :password
-      = password_field_tag :password, ""
-    .actions
-      = submit_tag "Sign In"
+= form_tag sessions_path, {class: "col-md-4", role: "form"} do
+  
+  %h2.form-signin-heading Please sign in
+  
+  = text_field_tag :email, "", autofocus: "", placeholder: "Email address", class: "form-control"
+  = password_field_tag :password, "", class: "form-control"
+  
+  = submit_tag "Sign In", class: "btn btn-lg btn-primary btn-block"

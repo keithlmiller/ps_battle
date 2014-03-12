@@ -1,6 +1,6 @@
 class BattlesController < ApplicationController
+  before_action :authorize_user!, except:[:index, :show]
   before_action :set_battle, only: [:show, :edit, :update, :destroy]
-
 
   # GET /battles
   # GET /battles.json
