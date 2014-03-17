@@ -1,10 +1,13 @@
-class PostsController < ApplicationController
+class Battles::PostsController < ApplicationController
+  before_action :authorize_user!, except:[:index, :show]
+  before_action :set_battle, only: [:index, :new, :create]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.scoped
+    @post = Post.new
   end
 
   # GET /posts/1
@@ -14,7 +17,7 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = Post.new
+    @post = @battle.posts.new
   end
 
   # GET /posts/1/edit
@@ -24,12 +27,12 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new( post_params )
-
+    @post = @battle.posts.new( post_params )
+    @post.creator = current_user.id
+    
     respond_to do |format|
       if @post.save
-        @post = Post.new(:name => params[:post][:name], :creator => current_user.id, :created_at => Time.now, :battle_id => params[:post][:battle_id])
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.html { redirect_to @battle, notice: 'Post was successfully created.' }
         format.json { render action: 'show', status: :created, location: @post }
       else
         format.html { render action: 'new' }
@@ -42,8 +45,8 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1.json
   def update
     respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+      if @post.update(params[:post])
+        format.html { redirect_to @battle, notice: 'Post was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -57,7 +60,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url }
+      format.html { redirect_to battle_url(@battle) }
       format.json { head :no_content }
     end
   end
@@ -66,10 +69,15 @@ class PostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
+      @battle = @post.battle
     end
 
+    def set_battle
+      @battle = Battle.find(params[:battle_id])
+    end
+  
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :description, :creator, :parent, :image)
+      params.require(:post).permit(:title, :description, :image)
     end
 end

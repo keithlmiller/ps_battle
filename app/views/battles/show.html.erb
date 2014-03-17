@@ -13,22 +13,26 @@
 <p>
   <strong>Creator:</strong>
   <%= @battle.creator %>
+  
+</p>
+<p>
+  <%= image_tag @battle.image.url(:medium) %>
 </p>
 
 <table>
   <tr>
-    <th>Post Title</th>
+    <th>Replies</th>
   </tr>
-  <% for posts in @battle.posts %>
+  <% @battle.posts.each do |post| %>
     <tr>
-      <td><%= link_to h(post.name), post_path(post.id) %>
-      <td><%= link_to "Show", topic %></td>
-      <td><%= link_to "Edit", edit_topic_path(topic) %></td>
-      <td><%= link_to "Destroy", topic, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= post.title %></td>
+      <td><%= image_tag post.image.url(:thumb) %></td>
+      <td><%= link_to "Remove", post_path(post), data: {:confirm => 'Are you sure?'}, :method => :delete %></td>
+
     </tr>
   <% end %>
 </table>
 
-<%= link_to 'New Post', '/posts/new?battle=#{@battle.id}' %>
+<%= link_to 'Add to the battle', new_battle_post_path(@battle) %>
 <%= link_to 'Edit', edit_battle_path(@battle) %> |
 <%= link_to 'Back', battles_path %>

@@ -20,7 +20,7 @@
         <td><%= post.description %></td>
         <td><%= post.creator %></td>
         <td><%= post.parent %></td>
-        <td><%= link_to 'Show', post %></td>
+        <td><%= link_to 'Reply', new_post_path(:parent_id => post) %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

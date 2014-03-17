@@ -18,9 +18,8 @@
         <td><%= link_to h(battle.name), battle_path(battle.id) %></td>
         <td><%= battle.description %></td>
         <td><%= battle.creator %></td>
-        <td><%= link_to 'Show', battle %></td>
         <td><%= link_to 'Edit', edit_battle_path(battle) %></td>
-        <td><%= link_to 'Destroy', battle, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', battle, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

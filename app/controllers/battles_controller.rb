@@ -30,7 +30,7 @@ class BattlesController < ApplicationController
 
     respond_to do |format|
       if @battle.save
-        @battle = Battle.new(:name => params[:battle][:name], :creator => current_user.id, :created_at => Time.now)
+        @battle = Battle.new(:name => params[:battle][:name], :creator => current_user.email, :created_at => Time.now)
         format.html { redirect_to @battle, notice: 'Battle was successfully created.' }
         format.json { render action: 'show', status: :created, location: @battle }
       else
@@ -72,6 +72,6 @@ class BattlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def battle_params
-      params.require(:battle).permit(:name, :description, :creator)
+      params.require(:battle).permit(:name, :description, :creator, :image)
     end
 end

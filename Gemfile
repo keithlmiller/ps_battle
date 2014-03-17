@@ -34,7 +34,9 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 
 gem 'haml'
 
-gem 'acts_as_tree'
+#gem 'acts_as_tree'
+
+gem 'ancestry'
 
 gem 'paperclip', '~> 4.1'
 

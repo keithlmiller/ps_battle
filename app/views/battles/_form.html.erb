@@ -16,9 +16,13 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
+    <%= f.file_field :image %>
+  </div>
+  <div class="field">
     <%= f.label :description %><br>
     <%= f.text_field :description %>
   </div>
+    <% @battle.creator = current_user %>
   <div class="actions">
     <%= f.submit %>
   </div>
